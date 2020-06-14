@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Net.Http;
+    using System.Text;
     using System.Text.Json;
     using System.Threading.Tasks;
     using BethanysPieShopHRM.Shared;
     using EnsureThat;
+    using Microsoft.AspNetCore.Mvc.Formatters;
 
     public class EmployeeDataService : IEmployeeDataService
     {
@@ -35,19 +37,30 @@
             ).ConfigureAwait(false);
         }
 
-        public Task<Employee> AddEmployee(Employee employee)
+        public async Task<Employee> AddEmployee(Employee employee)
         {
-            throw new System.NotImplementedException();
+            var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, MediaType.Json);
+            var response = await _httpClient.PostAsync("api/employee", employeeJson).ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await JsonSerializer.DeserializeAsync<Employee>(
+                    await response.Content.ReadAsStreamAsync().ConfigureAwait(false)
+                    ).ConfigureAwait(false);
+            }
+
+            return null;
         }
 
-        public Task UpdateEmployee(Employee employee)
+        public async Task UpdateEmployee(Employee employee)
         {
-            throw new System.NotImplementedException();
+            var employeeJson = new StringContent(JsonSerializer.Serialize(employee), Encoding.UTF8, MediaType.Json);
+            await _httpClient.PutAsync("api/employee", employeeJson).ConfigureAwait(false);
         }
 
         public Task DeleteEmployee(int employeeId)
         {
-            throw new System.NotImplementedException();
+            return _httpClient.DeleteAsync($"api/employee/{employeeId}");
         }
     }
 }

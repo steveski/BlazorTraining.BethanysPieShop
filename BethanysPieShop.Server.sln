@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BethanysPieShop.Server", "BethanysPieShop.Server\BethanysPieShop.Server.csproj", "{5D3A0AF6-0EA9-44FA-97B9-B76968D534EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShop.Server", "BethanysPieShop.Server\BethanysPieShop.Server.csproj", "{5D3A0AF6-0EA9-44FA-97B9-B76968D534EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BethanysPieShopHRM.Shared", "BethanysPieShopHRM.Shared\BethanysPieShopHRM.Shared.csproj", "{D7CD472E-886C-4754-85E1-77FF724DBEB5}"
 EndProject
