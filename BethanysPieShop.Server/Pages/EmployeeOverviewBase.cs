@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using BethanysPieShopHRM.Shared;
+    using Components;
     using Microsoft.AspNetCore.Components;
     using Services;
 
@@ -19,11 +20,19 @@
         [Inject]
         public IEmployeeDataService EmployeeDataService { get; set; }
 
+        // This property name HAS to match the @ref name in the template
+        protected AddEmployeeDialogBase AddEmployeeDialog { get; set; }
+
+
         protected override async Task OnInitializedAsync()
         {
             Employees = (await EmployeeDataService.GetAllEmployees().ConfigureAwait(false))?.ToList();
 
+        }
 
+        protected void QuickAddEmployee()
+        {
+            AddEmployeeDialog.Show();
         }
 
     }
